@@ -1,5 +1,4 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { faker } from "@faker-js/faker";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { v4 } from "uuid";
@@ -13,17 +12,11 @@ export default {
 
 export const Basic: ComponentStory<typeof Transfer> = () => {
   const originalData: RecordType[] = [
-    { key: v4(), content: faker.name.firstName(), group: "left" },
-    { key: v4(), content: faker.name.firstName(), group: "left" },
-    { key: v4(), content: faker.name.firstName(), group: "left" },
-    { key: v4(), content: faker.name.firstName(), group: "left" },
-    { key: v4(), content: faker.name.firstName(), group: "left" },
-    { key: v4(), content: faker.name.fullName(), group: "left" },
-    { key: v4(), content: faker.name.fullName(), group: "left" },
-    { key: v4(), content: faker.name.fullName(), group: "left" },
-    { key: v4(), content: faker.name.fullName(), group: "left" },
-    { key: v4(), content: faker.name.fullName(), group: "left" },
-    { key: v4(), content: faker.name.fullName(), group: "left" },
+    { key: v4(), content: "Rosa", group: "left" },
+    { key: v4(), content: "Isaac", group: "left" },
+    { key: v4(), content: "Kale", group: "left" },
+    { key: v4(), content: "Samson", group: "left" },
+    { key: v4(), content: "Kenton", group: "left" },
   ];
 
   const [dataSource, setDataSource] = useState(originalData);

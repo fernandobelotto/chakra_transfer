@@ -8,9 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "serve-storybook": "serve storybook-static"
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public",
+    "serve-storybook": "npx serve storybook-static"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.9",
