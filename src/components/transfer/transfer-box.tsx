@@ -5,6 +5,7 @@ export const TransferBox = (props: {
   allChecked: boolean | undefined;
   isIndeterminate: boolean | undefined;
   items: any[];
+  selectedItems: any[];
   handleSelectItem: (arg0: any) => void;
   handleSelectAll: (group: string, value: boolean) => void;
   group: string;
@@ -24,10 +25,17 @@ export const TransferBox = (props: {
           isIndeterminate={props.isIndeterminate}
           onChange={(e) => props.handleSelectAll(props.group, e.target.checked)}
         />
-        <Text>{props.items.length} Items</Text>
+        {props.selectedItems?.length !== 0 && (
+          <Text>
+            {props.selectedItems.length} / {props.items.length} Items
+          </Text>
+        )}
+        {props.selectedItems?.length === 0 && (
+          <Text>{props.items.length} Items</Text>
+        )}
         <Text>{props.title}</Text>
       </HStack>
-      <VStack p={2} w="full" align="flex-start" overflow={"scroll"}>
+      <VStack p={2} w="full" align="flex-start" overflow="auto">
         {props.items.length === 0 && (
           <Center h="full" w="full">
             <Text>No items</Text>

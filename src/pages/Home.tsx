@@ -15,6 +15,9 @@ export const Home = () => {
     { key: v4(), content: faker.name.firstName(), group: "left" },
     { key: v4(), content: faker.name.firstName(), group: "left" },
     { key: v4(), content: faker.name.firstName(), group: "left" },
+    { key: v4(), content: faker.name.firstName(), group: "left" },
+    { key: v4(), content: faker.name.firstName(), group: "left" },
+    { key: v4(), content: faker.name.firstName(), group: "left" },
   ];
 
   const [dataSource, setDataSource] = useState(originalData);

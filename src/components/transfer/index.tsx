@@ -9,6 +9,7 @@ type Props = {
 };
 
 export const Transfer = ({ dataSource, setDataSource }: Props) => {
+  
   const {
     handleSelectItem,
     handleSelectAll,
@@ -22,11 +23,14 @@ export const Transfer = ({ dataSource, setDataSource }: Props) => {
     isSomeItemSelectedRight,
     handleMoveToRight,
     handleMoveToLeft,
+    leftSelectedItems,
+    rightSelectedItems,
   } = useTransfer({ dataSource, setDataSource });
 
   return (
     <HStack h="300px">
       <TransferBox
+        selectedItems={leftSelectedItems}
         items={leftItems}
         handleSelectItem={handleSelectItem}
         allChecked={allCheckedLeft}
@@ -54,6 +58,7 @@ export const Transfer = ({ dataSource, setDataSource }: Props) => {
         />
       </VStack>
       <TransferBox
+        selectedItems={rightSelectedItems}
         items={rightItems}
         handleSelectItem={handleSelectItem}
         allChecked={allCheckedRight}

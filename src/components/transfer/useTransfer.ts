@@ -74,6 +74,9 @@ export function useTransfer({ dataSource, setDataSource }: Props) {
     setDataSource(newItems);
   };
 
+  const leftSelectedItems = leftItems.filter((item) => item.isSelected);
+  const rightSelectedItems = rightItems.filter((item) => item.isSelected);
+
   return {
     handleSelectItem,
     handleSelectAll,
@@ -87,5 +90,7 @@ export function useTransfer({ dataSource, setDataSource }: Props) {
     isSomeItemSelectedRight,
     handleMoveToRight,
     handleMoveToLeft,
+    leftSelectedItems,
+    rightSelectedItems
   };
 }
