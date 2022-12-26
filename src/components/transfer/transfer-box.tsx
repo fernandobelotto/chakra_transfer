@@ -16,7 +16,6 @@ export const TransferBox = (props: {
       height="full"
       border="1px solid"
       borderColor="grey"
-      overflow="scroll"
       spacing={0}
     >
       <HStack p={2} borderBottom="1px solid" borderColor="grey">
