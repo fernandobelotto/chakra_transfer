@@ -1,86 +1,67 @@
-import {
-  Box,
-  Flex,
-  VStack,
-  IconButton,
-  Text,
-  Checkbox,
-  HStack,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-type Props = {};
+import { HStack, IconButton, VStack } from "@chakra-ui/react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { TransferBox } from "./transfer-box";
+import { RecordType, useTransfer } from "./useTransfer";
 
-interface RecordType {
-  key: string;
-  title: string;
-  description: string;
-}
+type Props = {
+  dataSource: RecordType[];
+  setDataSource: (data: RecordType[]) => void;
+};
 
-const mockData: RecordType[] = Array.from({ length: 10 }).map((_, i) => ({
-  key: i.toString(),
-  title: `content${i + 1}`,
-  description: `description of content${i + 1}`,
-}));
-
-const initialTargetKeys = mockData
-  .filter((item) => Number(item.key) > 6)
-  .map((item) => item.key);
-
-export const Transfer = (props: Props) => {
-  const {} = props;
-
-  const [targetKeys, setTargetKeys] = useState(initialTargetKeys);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-
-  const [checkedItems, setCheckedItems] = React.useState([false, false]);
-
-  const allChecked = checkedItems.every(Boolean);
-  const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
-
-  const TransferBoxLeft = () => (
-    <Box border="1px solid" borderColor="grey" rounded="lg">
-      <Box p={1} borderBottom="1px solid" borderColor="grey">
-        <HStack>
-          <Checkbox
-            isChecked={allChecked}
-            isIndeterminate={isIndeterminate}
-            onChange={(e) =>
-              setCheckedItems([e.target.checked, e.target.checked])
-            }
-          />
-
-          <Text>{targetKeys.length} Items</Text>
-          <Text>Title</Text>
-        </HStack>
-      </Box>
-      <Box p={1}>
-        <VStack>
-          {targetKeys.map((item) => {
-            return <Checkbox>{item}</Checkbox>;
-          })}
-        </VStack>
-      </Box>
-    </Box>
-  );
+export const Transfer = ({ dataSource, setDataSource }: Props) => {
+  const {
+    handleSelectItem,
+    handleSelectAll,
+    leftItems,
+    rightItems,
+    allCheckedLeft,
+    allCheckedRight,
+    isIndeterminateLeft,
+    isIndeterminateRight,
+    isSomeItemSelectedLeft,
+    isSomeItemSelectedRight,
+    handleMoveToRight,
+    handleMoveToLeft,
+  } = useTransfer({ dataSource, setDataSource });
 
   return (
-    <Flex gap={2} alignItems="center" flexWrap="wrap">
-      <TransferBoxLeft />
-
+    <HStack h="300px">
+      <TransferBox
+        items={leftItems}
+        handleSelectItem={handleSelectItem}
+        allChecked={allCheckedLeft}
+        isIndeterminate={isIndeterminateLeft}
+        handleSelectAll={handleSelectAll}
+        group="left"
+        title="source"
+      />
       <VStack>
         <IconButton
           aria-label="Move to right"
           icon={<FiChevronRight />}
           size="xs"
+          colorScheme="blue"
+          onClick={handleMoveToRight}
+          isDisabled={!isSomeItemSelectedLeft}
         />
         <IconButton
           aria-label="Move to left"
           icon={<FiChevronLeft />}
           size="xs"
+          colorScheme="blue"
+          isDisabled={!isSomeItemSelectedRight}
+          onClick={handleMoveToLeft}
         />
       </VStack>
-      <TransferBoxLeft />
-    </Flex>
+      <TransferBox
+        items={rightItems}
+        handleSelectItem={handleSelectItem}
+        allChecked={allCheckedRight}
+        isIndeterminate={isIndeterminateRight}
+        handleSelectAll={handleSelectAll}
+        group="right"
+        title="target"
+      />
+    </HStack>
   );
 };
